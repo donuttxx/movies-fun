@@ -1,1 +1,38 @@
-Hello World!
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block content %}
+
+
+<div class="container">
+    <b>il y a {{ count }} films</b>
+
+
+    {% if page ==1 %}
+        <h1>Les 50 films les plus récents</h1>
+    {%  endif %}
+     {% if page >1 %}
+         <h1>Le reste des films</h1>
+         <a href="{{ path('movie_list',{'page':previouspage}) }}" class="btn btn-info" id="previous">Page précédente</a>
+    {%  endif %}
+
+         <a href="{{ path('movie_list',{'page':nextpage}) }}" class="btn btn-info pull-right" id="next">Page suivante</a>
+
+</div>
+
+    <div class="container">
+
+    {% for movie in movies %}
+
+            <a href="{{ path('movie_detail',{'id':movie.id})}}" title="detail" >
+            <img src="{{asset('posters/' ~ movie.imdbId ~ ".jpg")}}" alt="poster" class="img-thumbnail"></a>
+
+    {% endfor %}
+    </div>
+
+{% endblock %}
+
+{% block title %} 50 derniers films | {{ parent()}} {% endblock %}
+
+{% block js %}
+
+{% endblock %}

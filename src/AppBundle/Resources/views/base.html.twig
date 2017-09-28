@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+
+    {% block stylesheets %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/skull.png') }}" />
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Anton|Open+Sans+Condensed:300" rel="stylesheet">
+
+    <title>{% block title %}Movies {% endblock %}</title>
+
+</head>
+<body>
+<div class="container">
+
+        <H1> <a href="{{ path('movie_list')}}" title="Accueil du site" id="home"><img  src="{{ asset('img/logo_video.png') }}" alt="Logo">
+            </a>Movies</H1>
+
+            <nav class="navbar navbar-default">
+                <ul class="nav navbar-nav">
+                    {%  if is_granted('ROLE ADMIN')%}
+                    <li class="active"><a href="{{ path('movie_admin')}}" title="Liste Films">Gestion des Films</a></li>
+                    {%  endif %}
+                    {%  if app.user %}
+                        <li><a href="{{ path ('logout') }}">Deconnexion</a></li>
+                    {%  else %}
+                        <li><a href="{{ path ('login') }}">Connexion</a></li>
+                        <li><a href="{{ path('user_register') }}">inscription</a></li>
+                    {%  endif %}
+                </ul>
+            </nav>
+                {%  if app.user %}
+                <div>
+                   <span class="label label-warning">Bonjour {{ app.user.username }}</span>
+                {%  endif %}
+                </div>
+        </div>
+
+            {# message flash#}
+            {% for label,messages in app.flashes %}
+            <div class="alert alert-{{ label }}">{% for message in messages %}
+                    {{ message }}
+                {% endfor %}</div>{% endfor %}
+
+
+{% block content %}
+
+
+
+
+
+        {% endblock %}
+        {% block javascripts %}{% endblock %}
+</body>
+</html>

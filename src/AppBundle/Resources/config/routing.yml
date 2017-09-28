@@ -1,3 +1,46 @@
-app_homepage:
-    path:     /
-    defaults: { _controller: AppBundle:Default:index }
+
+
+
+movie_list:
+     path: /{page}
+     defaults: { _controller: AppBundle:Movie:findAllFilms, page: 1 }
+     requirements:
+        page: '\d+'
+
+
+movie_detail:
+     path:  /movies/{id}/details
+     defaults: { _controller: AppBundle:Movie:detail}
+     requirements:
+        id: '\d+'
+
+movie_admin:
+      path: /movies/admin/list
+      defaults: { _controller: AppBundle:AdminMovie:adminlist}
+
+admin_create:
+      path: /movies/admin/create
+      defaults: {_controller : AppBundle:AdminMovie:admincreate}
+
+admin_edit:
+      path: /movies/admin/modif/{id}/
+      defaults: {_controller : AppBundle:AdminMovie:adminedit}
+      requirements:
+         id: '\d+'
+
+admin_delete:
+      path: /movies/admin/delete/{id}/
+      defaults: {_controller: AppBundle:AdminMovie:admindelete}
+      requirements:
+         id: '\d+'
+
+user_register:
+    path: /user/register/
+    defaults: {_controller: AppBundle:User:register}
+
+login:
+    path: /connexion/
+    defaults: {_controller : AppBundle:User:login}
+
+logout:
+    path: /deconnexion/

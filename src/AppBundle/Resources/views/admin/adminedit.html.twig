@@ -1,0 +1,12 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block content %}
+
+    <div class="container"><h1>Modif de films</h1>
+
+        {{form(movieForm,{'attr':{'novalidate':'novalidate'}} )}}
+
+    </div>
+{% endblock %}
+
+{% block title %}{{ parent() }} | Modification Film{% endblock %}
